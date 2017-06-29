@@ -11,14 +11,10 @@ author:
   email:             "joakim.lonnegren@gmail.com"
   twitter:           "LonnegrenJoakim"
   github:            "joalon"
-  #linkedin:          "lenpaul"
+  linkedin:          "joakimlonnegren"
 navigation:
 - title: About
   url: /about
-  #- title: Writing
-  #url: /writing
-  #- title: Contact
-  #  url: /contact
 
 paginate:            5
 disqus:              #"your-disqus"
