@@ -24,3 +24,4 @@ markdown:            kramdown
 highlighter:         rouge
 permalink:           none
 gems:                [jekyll-paginate]
+encoding:            UTF-8
