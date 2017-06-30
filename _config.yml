@@ -13,6 +13,8 @@ author:
   github:            "joalon"
   linkedin:          "joakim-lönnegren-8060287b"
 navigation:
+- title: Notes
+  url: /
 - title: About
   url: /about
 
