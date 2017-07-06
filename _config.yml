@@ -1,3 +1,4 @@
+---
 # Site Settings
 title:               Joalon
 tagline:             a software engineer
@@ -7,11 +8,11 @@ url:                "https://joalon.github.io"
 github:
   url:               #"https://lenpaul.github.io/Lagrange"
 author:
-  name:              "Joakim Lönnegren"
+  name:              "Joakim LÃ¶nnegren"
   email:             "joakim.lonnegren@gmail.com"
   twitter:           "LonnegrenJoakim"
   github:            "joalon"
-  linkedin:          "joakim-l�nnegren-8060287b"
+  linkedin:          "joakim-lönnegren-8060287b"
 navigation:
 - title: Notes
   url: /
