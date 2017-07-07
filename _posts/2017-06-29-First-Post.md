@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "First post!"
-author: "Joakim Lonnegren"
+author: "Joakim Lönnegren"
 categories: journal
 tags: [documentation,sample]
 #image:

@@ -8,14 +8,12 @@ url:                "https://joalon.github.io"
 github:
   url:               #"https://lenpaul.github.io/Lagrange"
 author:
-  name:              "Joakim LÃ¶nnegren"
+  name:              "Joakim Lönnegren"
   email:             "joakim.lonnegren@gmail.com"
   twitter:           "LonnegrenJoakim"
   github:            "joalon"
   linkedin:          "joakim-lönnegren-8060287b"
 navigation:
-- title: Notes
-  url: /
 - title: About
   url: /about
 
