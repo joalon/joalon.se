@@ -10,5 +10,5 @@ tags: [documentation,sample]
 #  credit:
 #  creditlink:
 ---
-Hello! Creating a place to store some personal notes.
+Hello, World!
 
