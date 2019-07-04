@@ -2,13 +2,9 @@
 layout: post
 title: "First post!"
 author: "Joakim Lönnegren"
-categories: journal
+categories: blog
 tags: [documentation,sample]
-#image:
-#  feature: cards.jpg
-#  teaser: cards-teaser.jpg
-#  credit:
-#  creditlink:
+comments: true
 ---
 Hello, World!
 

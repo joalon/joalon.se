@@ -2,4 +2,4 @@
 layout: page
 title: About
 ---
-An IT-Consultant deep in the enterprise bog. Linux enthusiast and machine learning hobbyist.
+A swedish expat living in Brazil. Linux enthusiast and machine learning hobbyist.

@@ -4,7 +4,7 @@ title:               Joalon
 tagline:             a software engineer
 description:
 baseurl:            #"/Lagrange"
-url:                "https://joalon.github.io"
+url:                "https://joalon.se"
 github:
   url:               #"https://lenpaul.github.io/Lagrange"
 author:
@@ -18,11 +18,12 @@ navigation:
   url: /about
 
 paginate:            5
-disqus:              #"your-disqus"
+disqus:              "joalon-se"
 
 # Build settings
 markdown:            kramdown
 highlighter:         rouge
 permalink:           none
-gems:                [jekyll-paginate]
+plugins:             [jekyll-paginate]
 encoding:            UTF-8
+
