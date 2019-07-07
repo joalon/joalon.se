@@ -8,8 +8,6 @@ comments: true
 image:
   feature: aoe2-ml-image-generator/early-dark-age.jpg
   teaser: aoe2-ml-image-generator/early-dark-age-teaser.jpg
-credit: The fast.ai team
-creditlink: https://fast.ai
 ---
 
 After starting the fastai machine learning course I wanted to do some experiments with a game I play and love, Age of Empires 2. The first thing you need for a computer vision task (which is the first lesson) is a couple of hundred training images. Instead of using Google Images I decided to test my GUI automation skills with pyautogui. Google would probably have taken much less time in the end but it was a fun project, here's how I did it.
