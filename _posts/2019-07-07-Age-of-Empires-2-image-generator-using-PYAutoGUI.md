@@ -74,9 +74,13 @@ The rest of the generation process I'll leave as an exercise for the reader.
 
 After a couple of hours of work our program can now generate about twelve 224x224 pixel png:s of a villager or empty terrain per minute. Not precisely light speed. I'm still working on some bugs, for example here are some pictures where the villager placement is either off-screen or failed because of an obstacle:
 
+![No villager in sight](/images/aoe2-ml-image-generator/no-villager-in-sight.png "No villager in sight")
+![An offscreen villager](/images/aoe2-ml-image-generator/off-screen-villager.png "Where is it?")
+
 And here are some where it placed a villager where there shouldn't be one:
 
-
+![An unexpected villager](/images/aoe2-ml-image-generator/an-unexpected-villager.png "An unexpected villager")
+![Another unexpected villager](/images/aoe2-ml-image-generator/an-unexpected-villager_2.png "Nobody expects...")
 
 I let it stay on over night and got 2000 pictures for a dataset that you can download here: [joalon.se/datasets](https://joalon.se/datasets/villager-or-not.tgz). If you're following the fastai course you can download the dataset by doing `untar_data('https://joalon.se/datasets/villager-or-not')`
 It still contains some misslabeled images but that'll get cleaned up during upcoming posts. Next time I'll use these images to train a model, stay tuned!
