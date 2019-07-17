@@ -14,8 +14,8 @@ author:
   github:            "joalon"
   linkedin:          "joakim-lönnegren-8060287b"
 navigation:
-- title: About
-  url: /about
+- title:             About
+  url:               "/about.html"
 
 paginate:            5
 disqus:              "joalon-se"
