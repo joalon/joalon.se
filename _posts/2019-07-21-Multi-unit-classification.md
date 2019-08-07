@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Multi unit classification- Detecting units"
+title: "Multi unit classification- Predicting multiple labels per image"
 author: "Joakim Lönnegren"
 categories: blog
 tags: [Age of Empires 2, fastai]
@@ -21,10 +21,8 @@ multi-unit/
     2.png
     etc...
 ```
-
 Where labels.csv looks like this:
 ![csv show head](/images/aoe2-multi-unit/show-csv-head.png)
-
 
 You can then use the dataset with the following code:
 
