@@ -31,7 +31,7 @@ Under tmp-dir run the following command to clone the hardening role into the `ro
 git clone https://opendev.org/openstack/ansible-hardening roles/ansible-hardening
 ```
 
-The ansible-hardening role is written to use both tags and variables to customize the functionality. For example, the security_ntp_servers variable takes a list of ntp servers and applies them to your system. Tags can then be used to customize which tasks to be run, for example running the example with `--skip-tags ntpd`, which would skip all controls relating to the ntp daemon. The full updated list of controls can be found in the documentation [](). 
+The ansible-hardening role is written to use both tags and variables to customize the functionality. For example, the security_ntp_servers variable takes a list of ntp servers and applies them to your system. Tags can then be used to customize which tasks to be run, for example running the example with `--skip-tags ntpd`, which would skip all controls relating to the ntp daemon. The full updated list of controls can be found in [the documentation](https://docs.openstack.org/ansible-hardening/latest/controls-rhel7.html). 
 
 ## The Playbook
 When applying an ansible role to a server you'll need a playbook. Here follows a basic `hardening.yml` playbook which will apply the ansible-hardening role to all servers in the inventory.
@@ -51,7 +51,7 @@ When applying an ansible role to a server you'll need a playbook. Here follows a
 
 Ansible is still migrating from Python 2 to Python 3. When running this playbook without specifying the ansible_python_interpreter I got the error "No match for argument: python2-dnf". Since I couldn't install that package I went digging and found the following issue [54855](https://github.com/ansible/ansible/issues/54855). The fix mentioned is to specify the python3 interpreter for the time being.
 
-When running a playbook the default command is `ansible-playbook` which is often run with `ansible-playbook (flags) <playbook>.yml`. For running this playbook I used the following command:
+The playbook can be run with `ansible-playbook (flags) <playbook>.yml`:
 
 ```bash
 ansible-playbook -CkKi  'localhost,'  hardening.yml
@@ -70,7 +70,7 @@ Running this took around 10 minutes and the results look something like this:
 
 ![Results](/images/ansible-hardening/ansible-playbook-result.png)
 
-Any green 'ok' is acceptably hardened. The yellow 'changed' are items you'll want to take a look at.
+The yellow 'changed' are items you'll want to take a look at.
 
 ## Bonus: AWX
 I've also setup [AWX](https://github.com/ansible/awx), the upstream version of Ansible Tower which is a server with a web GUI for running ansible playbooks in an enterprise environment. the goal here is to get AWX to run ansible-hardening in check-mode against the same laptop and display the result in the browser.
@@ -127,4 +127,4 @@ After setting all this up you can launch a job in the job-template screen. The f
 
 ![AWX Results](/images/ansible-hardening/awx-successful.png)
 
-Thanks for reading! 
+In the result you can click the lines to get a description of the hardening procedure. Thanks for reading!
