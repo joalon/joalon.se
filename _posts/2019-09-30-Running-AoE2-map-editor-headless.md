@@ -52,15 +52,15 @@ from pyvirtualdisplay.smartdisplay import SmartDisplay
 
 def generate_villager_dataset(numberOfImages)
      with SmartDisplay(visible=1 if VISIBLE else 0, size=(1024,768)) as disp:
-         with EasyProcess('steam steam://rungameid/#########  GAMEID HERE ##############'):
-              pyautogui._pyautogui_x11._display = Xlib.display.Display(os.environ['DISPLAY'])
+         pyautogui._pyautogui_x11._display = Xlib.display.Display(os.environ['DISPLAY'])
+         with EasyProcess('bash -c "steam steam://rungameid/221380"'):
            
              ### Rest of the code here ###
 ```
 
 If you add the preceding code to the python script and then check which processes it starts, it will start either Xvfb or Xephyr, depending on the global `VISIBLE=True/False` variable.
 
-Setting the display for pyautogui on line 4 in the function is a workaround to send mouse clicks and keyboard presses to the right context. Here's a [stackoverflow answer](https://stackoverflow.com/questions/35798478/how-i-can-attach-the-mouse-movement-pyautogui-to-pyvirtualdisplay-with-seleniu) with more details. This might get fixed in the future, you can follow the problem and development of the headless/remote functionality in issue [133](https://github.com/asweigart/pyautogui/issues/133). Also note the Display `size=(1920, 1080)` and `--resolution=1920x1080`, Age of Empires 2 won't run with a resolution smaller than 960\*600. I found using another resolution than my native would make it hard for pyautogui to recognize the images when using `pyautogui.locateCenterOnScreen`
+Setting the display for pyautogui on line 2 in the function is a workaround to send mouse clicks and keyboard presses to the right context. Here's a [stackoverflow answer](https://stackoverflow.com/questions/35798478/how-i-can-attach-the-mouse-movement-pyautogui-to-pyvirtualdisplay-with-seleniu) with more details. This might get fixed in the future, you can follow the problem and development of the headless/remote functionality in issue [133](https://github.com/asweigart/pyautogui/issues/133). Also note the Display `size=(1920, 1080)` and `--resolution=1920x1080`, Age of Empires 2 won't run with a resolution smaller than 960\*600. I found using another resolution than my native would make it hard for pyautogui to recognize the images when using `pyautogui.locateCenterOnScreen`
 
 ![Resolution error](/images/headless-map-editor/aoe2-resolution-error.png)
 
