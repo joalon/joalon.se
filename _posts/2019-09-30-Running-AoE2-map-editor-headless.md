@@ -1,6 +1,6 @@
 ---
 layout: post
-title: ""
+title: "Running the AoE 2 map editor headless"
 author: "Joakim Lönnegren"
 categories: blog
 tags: [Age of Empires 2, Xvfb, Python, PyAutoGUI]
@@ -11,7 +11,7 @@ image:
 
 I've been running the AoE2 map editor with a pyautogui script to generate machine learning datasets. A problem is this hogs the mouse and screen on my laptop for long periods of time. It would be nice to be able to run this in the background. On Linux and using the X graphics server there are several ways to do this, I'll be using PyVirtualDisplay which will create a nested/virtual X server. The PyVirtualDisplay is a python wrapper that integrates with Xvfb, Xvnc and Xephyr but it requires modifications of the python script itself to start.
 
-As usual you can find the code on [Github](https://github.com/joalon/aoe2-ml-image-generator). This time we're building on top of the earlier work on the aoe2-ml-image-generator repository.
+As usual you can find the code on [Github](https://github.com/joalon/aoe2-ml-image-generator). This time I'm building on top of the earlier work on the aoe2-ml-image-generator repository.
 
 Prerequisites
 In this post I'll use the following list of applications,
@@ -44,7 +44,7 @@ A window should now pop up with a picture of the famous glxgears.
 To kill glxgears and xvfb you can run `fg` and `Ctrl-C` twice. This brings background processes started with & to the foreground so you can interrupt them. 
 
 ## Pyvirtualdisplay
-[The PyVirtualDisplay](https://pypi.org/project/PyVirtualDisplay/) is a wrapper around Xvfb, Xephyr and Xvnc. We'll have to scrap the `start_aoe2` function and instead use EasyProcess to start with a virtual display:
+[The PyVirtualDisplay](https://pypi.org/project/PyVirtualDisplay/) is a wrapper around Xvfb, Xephyr and Xvnc. I'll have to scrap the `start_aoe2` function and instead use EasyProcess to start with a virtual display:
 
 ```python
 from easyprocess import EasyProcess
@@ -65,7 +65,7 @@ Setting the display for pyautogui on line 4 in the function is a workaround to s
 ![Resolution error](/images/headless-map-editor/aoe2-resolution-error.png)
 
 ## Python Argparse
-The python script doesn't need to change when using Xvfb, however we'll import the argparse library and add some flags to the script to improve usability. I used the tips in [this Stackoverflow question](https://stackoverflow.com/questions/27529610/call-function-based-on-argparse) for calling functions via a function map from command line arguments. Note that the argument parsing code must be located after any functions they call otherwise you'll get a "NameError: name ... is not defined".
+The python script doesn't need to change when using Xvfb, however I'll import the argparse library and add some flags to the script to improve usability. I used the tips in [this Stackoverflow question](https://stackoverflow.com/questions/27529610/call-function-based-on-argparse) for calling functions via a function map from command line arguments. Note that the argument parsing code must be located after any functions they call otherwise you'll get a "NameError: name ... is not defined".
 
 ```python
 import argparse
@@ -91,7 +91,7 @@ argument_function = FUNCTION_MAP[args.command]
 argument_function(numberOfImages=args.n[0])
 ```
 
-Running this we can now take a screenshot of the map editor without running it on the main display server using the snippets from the last code block. Running `python3 aoe2-ml-image-generator.py --visible multi_label` should start the map editor in a new window running under a separate X11 server and start generating images from the last lesson and pt them under `results/`
+Running this I can now take a screenshot of the map editor without running it on the main display server using the snippets from the last code block. Running `python3 aoe2-ml-image-generator.py --visible multi_label` should start the map editor in a new window running under a separate X11 server and start generating images from the last lesson and pt them under `results/`
 
 ![Headless map editor](/images/headless-map-editor/headless-map-editor.png)
 
