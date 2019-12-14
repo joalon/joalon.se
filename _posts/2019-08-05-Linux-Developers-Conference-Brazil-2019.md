@@ -44,7 +44,7 @@ A beginners guide to creating your own virtual machines in kvm via the C client 
 Some recaps on bugs like spectre and meltdown and how they affect KVM virtual machines.
 
 - Leveraging OP-TEE as a generic HSM via PKCS#11 for secure OTA. By Ricardo Salveti  
-A security talk on using the Open Portable Trusted Execution Environment (OP-TEE)[https://www.op-tee.org/ "OP-TEE"] and a hardware module for ensuring application authenticity. 
+A security talk on using the Open Portable Trusted Execution Environment [OP-TEE](https://www.op-tee.org/) and a hardware module for ensuring application authenticity. 
 
 - Malicious Linux Binaries: A Landscape. By Lucas Galante and Marcus Botacin  
 Great summary of linux malware. The big takeway was: Linux malware exists and should be taken seriously.
