@@ -9,7 +9,7 @@ image:
   teaser: chess-app/teaser.png
 ---
 
-I've been reading up on some of the early advances in AI and machine learning and stubmle over the [famous chess game](https://en.wikipedia.org/wiki/Deep_Blue_versus_Garry_Kasparov) between Garry Kasparov and Deep Blue. Inspired by this I wanted to get some practice in programming for chess so I started writing a simple chess application where I can play against an engine, in this case Stockfish.
+I've been reading up on some of the early advances in AI and machine learning and stumbled over the [famous chess game](https://en.wikipedia.org/wiki/Deep_Blue_versus_Garry_Kasparov) between Garry Kasparov and Deep Blue. Inspired by this I wanted to get some practice in programming for chess so I started writing a simple chess application where I can play against an engine, in this case Stockfish.
 
 ## Setting up
 If you don't have stockfish, install it for your distribution. I took the current version from AUR with `yay -S stockfish`.
@@ -91,11 +91,11 @@ rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
 The first chunk of text is the encoded positions of the pieces. Lower case letters for black's pieces, an integer for how many empty squares until either another piece or the end of the board and upper case for white's pieces. The ranks are separated by '/'. The other fields are:
 
 ```
-w             - Whose turn it is 'w' or 'b'
-KQkq       - Castling opportunities for both players. 'K' for king side for white, 'q' for queen side for black. '-' if castling is unavailable for both players
--              - En passant square, the square behind a pawn which moved two squares last turn
-0              - the number of 
-1              -
+w       - Whose turn it is 'w' or 'b'
+KQkq    - Castling opportunities for both players. 'K' for king side for white, 'q' for queen side for black. '-' if castling is unavailable for both players
+-       - En passant square, the square behind a pawn which moved two squares last turn
+0       - The number of half moves since a pawn moved or a piece was captured
+1       - The number of full turns since the start of the game
 ```
 
 To get this working I had to implement quite a bit of chess in python by myself, which is fiddly and bug prone. For example I have yet to implement castling in the [move function](https://github.com/joalon/playing-vs-stockfish/blob/9beb54d731c225ca84b43536bae7534b698eb52a/play.py#L65):
