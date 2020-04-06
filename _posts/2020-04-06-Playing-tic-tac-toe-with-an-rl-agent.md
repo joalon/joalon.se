@@ -16,11 +16,11 @@ You can check out the code on [my Github](https://github.com/joalon/rl-tictactoe
 ## Implementing the game
 First I needed to actually write the game the agent was going to play. I chose tic-tac-toe since it's an easy game which can be extended to later play on a 5-by-5 board which offers more tactical possibilities and doesn't draw as easily as the 3-by-3.
 
-Enter the class TicTacToe which holds the board state and has methods to manipulate it. The board is basically just a list of lists: `board = [[".", ".", "."], [".", ".", "."], [".", ".", "."]]`. I chose to represent state as something like FEN-position notation in chess, the first state is `3/3/3` and can look like this after a few moves: `1o1/xox/1x1`, and I 
+Enter the class TicTacToe which holds the board state and has methods to manipulate it. The board is basically just a list of lists: `board = [[".", ".", "."], [".", ".", "."], [".", ".", "."]]`. I chose to represent state as something like FEN-position notation in chess, the first state is `3/3/3` and can look like this after a few moves: `1o1/xox/1x1`, which looks like this:
 
 ![TicTacToe state example](/images/rl-tictactoe-agent/state-example.jpg)
 
-This is encapsulated in the `TicTacToe` class, which has a move function as well as `game_ended` function which is called when a move ends in a winning/losing state. I put this class into a tictactoe.py module.
+This is encapsulated in the `TicTacToe` class, which has a move function as well as `game_ended` function which is called when a move ends in a winning/losing state. I put this class into the tictactoe.py module.
 
 To play it I added a HumanAgent class (inherits from TicTacToeAgent) which asks the player for input. These live in their own module, agents.py.
 
@@ -75,8 +75,6 @@ while not tictactoe.game_has_ended()[0]:
         print(tictactoe)
 ```
 
-![Gif of playing vs myself](/images/rl-tictactoe/playing-vs-myself.gif)
-
 ## Add reinforcement learning
 Now that I had a functioning game I needed an agent to play against. The first one I wrote was a random player:
 
@@ -102,7 +100,7 @@ At last an opponent! But not a very good one, next up was implementing reinforce
 3. Increase each intermediate states value if the agent won, otherwise decrease it
 4. repeat from nr 2
 
-There are lots of customizations available but I started implementing the basic one.
+There are lots of customization's available but I started implementing the basic one.
 
 ```python
 class RLTicTacToeAgent(TicTacToeAgent):
@@ -181,15 +179,24 @@ rl-tictactoe-agent/
 ```
 
 ## Training
-With the algorithm done I started training it. I added 'training.py' which takes a[^1]esult during training, if enabled. Since the program holds the state in a pickled file (data.p) I ran the training program `time python3 training.py --file=data.p --verbose -n=100000`
+With the algorithm done I started training it. I added 'training.py' which takes the number of rounds to play as an argument. Since the program holds the state in a pickled file (data.p) I ran the training program `python3 training.py --file=data.p --verbose -n=100000`
+
+To take a look at the state dict I ran `python3 -i training.py --file=data.p`, which put me in an interactive python shell after the training run, and then print it with `state_dict`. Training it was straight forward:
 
 ![Executing training program](/images/rl-tictactoe-agent/executing-training.jpg)
 
-And after these 100 000 rounds (and ~15 minutes) it seems to have learned a thing or two. When playing against itself it draws all the time, meaning it either plays very bad or it has [solved the game](https://en.wikipedia.org/wiki/Tic-tac-toe#Strategy).
+And after these 100 000 rounds (and ~15 minutes) it should have learned a thing or two. I was hoping the algorithm would [solve the game](https://en.wikipedia.org/wiki/Tic-tac-toe#Strategy), let's see how it did playing versus itself:
 
-![List of draws](/images/rl-tictactoe/list-of-draws.jpg)
+![Rl vs rl](/images/rl-tictactoe-agent/rl-vs-rl-stats.png)
 
-To take a look at the state dict I ran `python3 -i training.py --file=data.p`, which put me in an interactive python shell after the training run, and then print it with `state_dict`.
+This didn't say much except that it's winning a fair bit. How does it do versus a random agent?
+
+![RL vs Random](/images/rl-tictactoe-agent/rl-vs-random-stats.png)
+
+So it did fairly well. Let's see how random versus random plays:
+
+![Random vs random](/images/rl-tictactoe-agent/random-vs-random-stats.png)
+
 
 ## Summary
-I'd like to refactor this in the future by moving the game logic into static methods, but that is for another weekend project. Most of all I'm glad the agent worked and finally beat me in a game of tic-tac-toe!
+I'd have liked the algorithm to have solved the game and play draw against itself all the time but I've still got some studying to do regarding the reinforcement learning side. In the near future I'll try to refactor by moving the game logic into static methods and tweak the reward/value functions in the agent, but that is for another weekend project. At least it beat random!
