@@ -134,9 +134,6 @@ class User(UserMixin, db.Model):
     def check_password(self, password):
         return check_password_hash(self.passwordHash, password)
 
-    def __repr__(self):
-        return f"<User '{self.username}'>"
-
     def __eq__(self, other):
         if isinstance(self, other.__class__):
             return self.id == other.id
@@ -203,16 +200,16 @@ In the `base.html` template I added the bootstrap dependencies:
 ...
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrit    y="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" cro    ssorigin="anonymous"></script>
-  1     ┆   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/pop    per.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3U    ksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-53          <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/boot    strap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0U    od8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-...
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/pop    per.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3U    ksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/boot    strap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0U    od8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
 ```
 
 I took a look at some of [the Bootstrap examples](https://getbootstrap.com/docs/4.5/examples/) to find some designs I liked. I ended up 'stealing' from `Sign-in`, `navbar static` and `offcanvas`.
 
 
 ## Posting and Commenting
-After the overhaul it was time to add some features. Posting and commenting was the trickiest part of the application. Since I decided I wanted both comments to posts as well as comments to other comments I had to make a recursive query in SQLAlchemy as well as get recursive templating going on the front end.
+After the overhaul it was time to add some features. Posting and commenting was the trickiest part of the application. Since I decided I wanted both comments to posts as well as comments to other comments I ended up making a recursive query in SQLAlchemy as well as  recursive templating going on the front end.
 
 The posts and comments models ended up looking like:
 
@@ -229,10 +226,6 @@ class Post(db.Model):
         "Comment", backref="post"
     )
 
-    def __repr__(self):
-        return f"<Post '{self.title}'>"
-
-
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.String(140))
@@ -242,10 +235,6 @@ class Comment(db.Model):
     parent_comment_id = db.Column(db.Integer, db.ForeignKey("comment.id"))
 
     parent = db.relationship("Comment", backref="comments", remote_side=[id])
-
-
-    def __repr__(self):
-        return f"<Comment '{self.id}'>"
 ```
 
 And a post with comments gets rendered with a pretty sweet recursive macro:
@@ -284,7 +273,7 @@ And a post with comments gets rendered with a pretty sweet recursive macro:
 ```
 
 
-This macro gets called in the template where the comments should be rendered. It creates an <ul> (unordered list) and populates it with an <li> for each comment. If the comment has comments ('if comment.comments') it does the recursive step `loop`, which calls itself with the argument. Credit to [this](https://stackoverflow.com/questions/42684484/jinja2-recursion-over-python-dictionary-and-sets/42726002) post on Stackoverflow about writing recursive jinja.
+This macro gets called in the template where the comments should be rendered. It creates an `<ul>` (unordered list) and populates it with an `<li>` (list item) for each comment. If the comment has comments (`if comment.comments`) it does the recursive step `loop`, which calls itself with the argument. Credit to [this](https://stackoverflow.com/questions/42684484/jinja2-recursion-over-python-dictionary-and-sets/42726002) post on Stackoverflow about writing recursive jinja.
 
 Here's another resource for making self-referential tables: [docs.sqlalchemy.org](https://docs.sqlalchemy.org/en/13/orm/self_referential.html).
 
